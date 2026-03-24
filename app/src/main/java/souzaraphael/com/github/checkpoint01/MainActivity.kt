@@ -8,16 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import souzaraphael.com.github.atividadeavaliativa.ui.theme.AtividadeAvaliativa1Theme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import souzaraphael.com.github.atividadeavaliativa.screens.LoginScreen
-import souzaraphael.com.github.atividadeavaliativa.screens.MenuScreen
-import souzaraphael.com.github.atividadeavaliativa.screens.PedidosScreen
-import souzaraphael.com.github.atividadeavaliativa.screens.PerfilScreen
+import souzaraphael.com.github.checkpoint01.screens.LoginScreen
+import souzaraphael.com.github.checkpoint01.screens.MenuScreen
+import souzaraphael.com.github.checkpoint01.screens.PedidosScreen
+import souzaraphael.com.github.checkpoint01.screens.PerfilScreen
 import souzaraphael.com.github.checkpoint01.ui.theme.Checkpoint01Theme
 
 class MainActivity : ComponentActivity() {
@@ -43,8 +40,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = "pedidos") {
                             PedidosScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
-                        composable(route = "perfil") {
-                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController)
+                        composable(route = "perfil/{nome}") {
+                            val nome: String? = it.arguments?.getString("nome", "Usuário anonimo")
+                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController, nome!!)
                         }
                     }
                 }
