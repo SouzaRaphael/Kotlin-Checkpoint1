@@ -46,9 +46,21 @@ class MainActivity : ComponentActivity() {
                         ) {
                             PedidosScreen(modifier = Modifier.padding(innerPadding), navController, it.arguments?.getString("cliente"))
                         }
-                        composable(route = "perfil/{nome}") {
-                            val nome: String? = it.arguments?.getString("nome", "Usuário anonimo")
-                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController, nome!!)
+                        composable(
+                            route = "perfil/{nome}/{idade}",
+                            arguments = listOf(
+                                navArgument("nome") { type = NavType.StringType },
+                                navArgument("idade") { type = NavType.IntType }
+                            )
+                        ) {
+                            val nome: String? = it.arguments?.getString("nome", "Usuário Genérico")
+                            val idade: Int? = it.arguments?.getInt("idade", 0)
+                            PerfilScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                nome!!,
+                                idade!!
+                            )
                         }
                     }
                 }
